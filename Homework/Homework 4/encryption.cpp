@@ -2,8 +2,19 @@
 #include<string>
 #include<limits>
 
-void ROT13Encryption()
+void encrypt(std::string &str)
 {
+    for (size_t i = 0; i < str.size(); ++i) {
+        
+        if ((tolower(str[i]) - 'a') < 14 {
+            str[i] = str[i] + 13;  
+        }
+        else
+        {
+            str[i] = str[i] - 13;
+        }
+    }
+    std::cout << str;
 }
 
 int GetNumCases()
@@ -34,6 +45,7 @@ int main()
 	for(int i = 0; i < numCases; i++)
 	{
 		PrintCaseStatement(i);
-		ROT13Encryption();
+        std::string str = GetArgument();
+        encrypt(str);
 	}
 }
