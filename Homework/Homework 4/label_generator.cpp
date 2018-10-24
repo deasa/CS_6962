@@ -46,7 +46,6 @@ void GenerateLabels()
     {
         std::cout << generator.next_label() << " ";
     }
-    
 }
 
 int GetNumCases()
