@@ -2,23 +2,71 @@
 #include<string>
 #include<limits>
 
-void LabelGenerator()
+
+class LabelGenerator
 {
+private:
+    std::string labelPref;
+    int currIndex;
+public:
+    LabelGenerator(std::string prefix, int start);
+    LabelGenerator();
+    ~LabelGenerator();
+    next_label();
+};
+
+LabelGenerator::LabelGenerator(const std::string &prefix, int start)
+{
+    labelPref = *prefix;
+    currIndex = start;
+}
+
+LabelGenerator::LabelGenerator()
+{
+}
+
+LabelGenerator::~LabelGenerator()
+{
+}
+
+std::string next_label()
+{
+    std::string label = labelPref + currIndex;
+    currIndex += 1;
+}
+
+void GenerateLabels()
+{
+    std::string prefix = GetStringArgument();
+    int start = GetIntArgument();
+    int numIter = GetIntArgument();
+    LabelGenerator generator(prefix, start);
+    
+    for(size_t i = 0; i < numIter; i++)
+    {
+        std::cout << generator.next_label() << " ";
+    }
+    
 }
 
 int GetNumCases()
 {
 	int response = 0;
 	std::cin >> response;
-	// std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return response;
 }
 
-std::string GetArgument()
+std::string GetStringArgument()
 {
 	std::string arg;
     std::cin >> arg;
-	// std::getline(std::cin, arg);
+    return arg;
+}
+
+int GetIntArgument()
+{
+    int arg;
+    std::cin >> arg;
     return arg;
 }
 
@@ -33,6 +81,6 @@ int main()
 	for(int i = 0; i < numCases; i++)
 	{
 		PrintCaseStatement(i);
-		LabelGenerator();
+		GenerateLabels();
 	}
 }
