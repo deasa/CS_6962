@@ -103,27 +103,57 @@ Mat3 transpose(Mat3 m)
 
 Vec3 row(Mat3 m, int i)
 {
-    
+    std::vector<Vec3> victor = {m.v0, m.v1, m.v2};
+    return victor[i];
     //return the i-th row of m (index from 0)
 }
 
 Vec3 col(Mat3 m, int i)
 {
+    Vec3 c;
+    if (i == 0) {
+        c.x = m.v0.x;
+        c.y = m.v1.x;
+        c.z = m.v2.x;
+    }
+    if (i == 1) {
+        c.x = m.v0.y;
+        c.y = m.v1.y;
+        c.z = m.v2.y;
+    }
+    if (i == 2) {
+        c.x = m.v0.z;
+        c.y = m.v1.z;
+        c.z = m.v2.z;
+    }
+    return c;
     //return the i-th column of m (index from 0)
 }
 
 Vec3 multiply(Mat3 m, Vec3 v)
 {
+    Vec3 res;
+    res.x = v.x * add(m.v0);
+    res.y = v.y * add(m.v1);
+    res.z = v.z * add(m.v2);
+    return res;
     //multiply a matrix with a vector and return the resulting vec3
 }
 
 Mat3 multiply(Mat3 m, Mat3 n)
 {
+    Mat3 res;
+    res.v0 = Vec3{ dot(m.v0, col(n, 0)), dot(m.v0, col(n, 1)), dot(m.v0, col(n, 2)) };
+    res.v1 = Vec3{ dot(m.v1, col(n, 0)), dot(m.v1, col(n, 1)), dot(m.v1, col(n, 2)) };
+    res.v2 = Vec3{ dot(m.v2, col(n, 0)), dot(m.v2, col(n, 1)), dot(m.v2, col(n, 2)) };
+    return res;
     //multiply a matrix with a matrix in the order given and return the resulting matrix
 }
 
 bool IsVectorNext()
 {
+    
+    return (std::cin >> std::ws).peek() == "V"
     // std::cin.peek to see if a vector is coming or if a matrix is coming
 }
 
