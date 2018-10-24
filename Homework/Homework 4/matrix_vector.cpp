@@ -1,6 +1,20 @@
 #include<iostream>
 #include<string>
-#include<limits>
+#include<vector>
+
+
+struct Vec3
+{
+    double x, y, z;
+};
+
+
+struct Mat3
+{
+    Vec3 v0, v1, v2;
+};
+
+
 
 void MatrixVector()
 {
