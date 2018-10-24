@@ -2,7 +2,7 @@
 #include<string>
 #include<limits>
 
-void ROT13Encryption()
+void MatrixVector()
 {
 }
 
@@ -13,7 +13,6 @@ int GetNumCases()
 	// std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	return response;
 }
-
 
 std::string GetArgument()
 {
@@ -34,6 +33,6 @@ int main()
 	for(int i = 0; i < numCases; i++)
 	{
 		PrintCaseStatement(i);
-		ROT13Encryption();
+		MatrixVector();
 	}
 }
