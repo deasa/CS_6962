@@ -19,7 +19,7 @@ std::string GetArgument()
 {
 	std::string arg;
     std::cin >> arg;
-	// std::getline(std::cin, name);
+	// std::getline(std::cin, arg);
     return arg;
 }
 
