@@ -1,7 +1,7 @@
 #include<iostream>
 #include<string>
 #include<vector>
-
+#include<cmath>
 
 struct Vec3
 {
@@ -14,48 +14,96 @@ struct Mat3
     Vec3 v0, v1, v2;
 };
 
+void read_idChar()
+{
+    std::string idChar;
+    std::cin >> idChar;
+}
+
 Vec3 read_vec()
 {
+    read_idChar();
+    Vec3 v;
+    std::cin >> v.x >> v.y >> v.z;
+    return v;
     //read three doubles from cin, use them to construct a Vec3, then return it
 }
 
 Mat3 read_mat()
 {
+    read_idChar();
+    Mat3 m;
+    Vec3 a, b, c;
+    std::cin >> a.x >> a.y >> a.z >> b.x >> b.y >> b.z >> c.x >> c.y >> c.z;
+    m.v0 = a;
+    m.v1 = b;
+    m.v2 = c;
+    return m;
     //read nine doubles from cin, then use it to construct a mat3 and return it (row-major ordering)
 }
 
 void print(Vec3 v)
 {
-    //print the given Vec3 in the format (x, y, z)
+    std::cout << "( " << v.x << ", " << v.y << ", " << v.z << " )";
+    //print the given Vec3 in the format ( x, y, z )
 }
 
 void print(Mat3 m)
 {
-    //print the given Mat3 in the format [a,b,c,d,e,f,g,h,i] (row-major ordering)
+    std::cout << "[ " << m.v0.x << ", " << m.v0.y << ", " << m.v0.z
+     << ", " << m.v1.x << ", " << m.v1.y << ", " << m.v1.z
+      << ", " << m.v2.x << ", " << m.v3.y << ", " << m.v2.z << " ]";
+    //print the given Mat3 in the format [ a, b, c, d, e, f, g, h, i ] (row-major ordering)
 }
 
 Vec3 add(Vec3 u, Vec3 v)
 {
+    Vec3 res;
+    res.x = u.x + v.x;
+    res.y = u.v + v.y;
+    res.z = u.z + v.z;
+    return res;
     //add the two and return the resulting Vec3
 }
 
 double dot(Vec3 u, Vec3 v)
 {
+    double res;
+    res = u.x * v.x;
+    res = res + (u.y * v.y);
+    res = res + (u.z * v.z);
+    return res;
     //return the dot product
 }
 
 double length(Vec3 v)
 {
+    double sumSquares;
+    sumSquares = pow(v.x, 2) + pow(v.y, 2) + pow(v.z, 2);
+    double res = sqrt(sumSquares);
+    return res;
     //return the length (or magnitude) of the input vector
 }
 
 Mat3 transpose(Mat3 m)
 {
-    //return the tranpose of m 
+    Mat3 mtrans;
+    mtrans.v0.x = m.v0.x;
+    mtrans.v0.y = m.v1.x;
+    mtrans.v0.z = m.v2.x;
+    mtrans.v1.x = m.v0.y;
+    mtrans.v1.y = m.v1.y;
+    mtrans.v1.z = m.v2.y;
+    mtrans.v2.x = m.v0.z;
+    mtrans.v2.y = m.v1.z;
+    mtrans.v2.z = m.v2.z;
+    return mtrans;
+    //return the transpose of m 
 }
 
 Vec3 row(Mat3 m, int i)
 {
+    
     //return the i-th row of m (index from 0)
 }
 
@@ -152,6 +200,13 @@ void AddOperation()
     print(c);
 }
 
+std::string GetOperationString()
+{
+    std::string str;
+    std::cin >> str;
+    return str;
+}
+
 void MatrixVectorOperation()
 {
     std::string operation = GetOperationString();
@@ -177,13 +232,6 @@ void MatrixVectorOperation()
     else if (operation == "col") {
         ColOperation();
     }
-}
-
-std::string GetOperationString()
-{
-    std::string str;
-    std::cin >> str;
-    return str;
 }
 
 int read_int()
