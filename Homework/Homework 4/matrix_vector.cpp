@@ -14,6 +14,13 @@ struct Mat3
     Vec3 v0, v1, v2;
 };
 
+int read_int()
+{
+    int arg;
+    std::cin >> arg;
+    return arg;
+}
+
 void read_idChar()
 {
     std::string idChar;
@@ -44,7 +51,7 @@ Mat3 read_mat()
 
 void print(Vec3 v)
 {
-    std::cout << "( " << v.x << ", " << v.y << ", " << v.z << " )";
+    std::cout << "( " << v.x << ", " << v.y << ", " << v.z << " )" << "\n";
     //print the given Vec3 in the format ( x, y, z )
 }
 
@@ -52,7 +59,7 @@ void print(Mat3 m)
 {
     std::cout << "[ " << m.v0.x << ", " << m.v0.y << ", " << m.v0.z
      << ", " << m.v1.x << ", " << m.v1.y << ", " << m.v1.z
-      << ", " << m.v2.x << ", " << m.v3.y << ", " << m.v2.z << " ]";
+      << ", " << m.v2.x << ", " << m.v2.y << ", " << m.v2.z << " ]" << "\n";
     //print the given Mat3 in the format [ a, b, c, d, e, f, g, h, i ] (row-major ordering)
 }
 
@@ -60,7 +67,7 @@ Vec3 add(Vec3 u, Vec3 v)
 {
     Vec3 res;
     res.x = u.x + v.x;
-    res.y = u.v + v.y;
+    res.y = u.y + v.y;
     res.z = u.z + v.z;
     return res;
     //add the two and return the resulting Vec3
@@ -110,7 +117,7 @@ Vec3 row(Mat3 m, int i)
 
 Vec3 col(Mat3 m, int i)
 {
-    Vec3 c;
+	Vec3 c = { 0,0,0 };
     if (i == 0) {
         c.x = m.v0.x;
         c.y = m.v1.x;
@@ -133,9 +140,9 @@ Vec3 col(Mat3 m, int i)
 Vec3 multiply(Mat3 m, Vec3 v)
 {
     Vec3 res;
-    res.x = v.x * add(m.v0);
-    res.y = v.y * add(m.v1);
-    res.z = v.z * add(m.v2);
+    res.x = v.x * m.v0.x + v.y * m.v0.y + v.z + m.v0.z;
+    res.y = v.x * m.v1.x + v.y * m.v1.y + v.z + m.v1.z;
+    res.z = v.x * m.v2.x + v.y * m.v2.y + v.z + m.v2.z;
     return res;
     //multiply a matrix with a vector and return the resulting vec3
 }
@@ -153,15 +160,15 @@ Mat3 multiply(Mat3 m, Mat3 n)
 bool IsVectorNext()
 {
     
-    return (std::cin >> std::ws).peek() == "V"
+	return std::cin.peek() == 'V';
     // std::cin.peek to see if a vector is coming or if a matrix is coming
 }
 
 void MultiplyOperation()
 {
     Mat3 m = read_mat();
-    Vec3 v;
-    Mat3 n;
+	Vec3 v = { 0,0,0 };
+    Mat3 n = { 0,0,0 };
     bool useVec = false;
 
     if (IsVectorNext()) {
@@ -211,15 +218,15 @@ void DotOperation()
 {
     Vec3 a = read_vec();
     Vec3 b = read_vec();
-    Vec3 c = dot(a, b);
-    print(c);
+    double c = dot(a, b);
+    std::cout << c << "\n";
 }
 
 void LengthOperation()
 {
     Vec3 v = read_vec();
     double len = length(v);
-    std::cout << len;
+    std::cout << len << "\n";
 }
 
 void AddOperation()
@@ -262,13 +269,6 @@ void MatrixVectorOperation()
     else if (operation == "col") {
         ColOperation();
     }
-}
-
-int read_int()
-{
-    int arg;
-    std::cin >> arg;
-    return arg;
 }
 
 int GetNumCases()
