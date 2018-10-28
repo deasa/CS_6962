@@ -2,51 +2,30 @@
 #include<string>
 #include<limits>
 
-
 class LabelGenerator
 {
-private:
-    std::string labelPref;
-    int currIndex;
-public:
-    LabelGenerator(std::string prefix, int start);
-    LabelGenerator();
-    ~LabelGenerator();
-    next_label();
+	private:
+		std::string labelPref;
+		int currIndex;
+	public:
+		LabelGenerator(std::string &prefix, int start)
+		{
+			labelPref = prefix;
+			currIndex = start;
+		}
+		LabelGenerator()
+		{
+		}
+		~LabelGenerator()
+		{
+		}
+		std::string next_label() 
+		{
+			std::string label = labelPref + std::to_string(currIndex);
+			currIndex += 1;
+			return label;
+		}
 };
-
-LabelGenerator::LabelGenerator(const std::string &prefix, int start)
-{
-    labelPref = *prefix;
-    currIndex = start;
-}
-
-LabelGenerator::LabelGenerator()
-{
-}
-
-LabelGenerator::~LabelGenerator()
-{
-}
-
-std::string next_label()
-{
-    std::string label = labelPref + currIndex;
-    currIndex += 1;
-}
-
-void GenerateLabels()
-{
-    std::string prefix = GetStringArgument();
-    int start = GetIntArgument();
-    int numIter = GetIntArgument();
-    LabelGenerator generator(prefix, start);
-    
-    for(size_t i = 0; i < numIter; i++)
-    {
-        std::cout << generator.next_label() << " ";
-    }
-}
 
 int GetNumCases()
 {
@@ -72,6 +51,20 @@ int GetIntArgument()
 void PrintCaseStatement(int i)
 {
 	std::cout << "Case " << i << ":\n";
+}
+
+void GenerateLabels()
+{
+	std::string prefix = GetStringArgument();
+	int start = GetIntArgument();
+	int numIter = GetIntArgument();
+	LabelGenerator generator(prefix, start);
+
+	for (size_t i = 0; i < numIter; i++)
+	{
+		std::cout << generator.next_label() << " ";
+	}
+	std::cout << "\n";
 }
 
 int main()
