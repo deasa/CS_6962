@@ -37,15 +37,15 @@ int GetNumCases()
 std::string GetStringArgument()
 {
 	std::string arg;
-    std::cin >> arg;
-    return arg;
+   std::cin >> arg;
+   return arg;
 }
 
 int GetIntArgument()
 {
-    int arg;
-    std::cin >> arg;
-    return arg;
+   int arg;
+   std::cin >> arg;
+   return arg;
 }
 
 void PrintCaseStatement(int i)
