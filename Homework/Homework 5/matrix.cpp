@@ -39,6 +39,8 @@ class Matrix
 		{
             numRows = 0;
             numCols = 0;
+            _matrix.resize(0);
+            _matrix[0].resize(0, 0);
             //create 0x0 matrix
 		}
 		Matrix::~Matrix()
@@ -138,7 +140,6 @@ std::string GetStringArgument()
 void MatrixOperation()
 {
     std::string operation = GetStringArgument();
-
 }
 
 void PrintCaseStatement(int i)
