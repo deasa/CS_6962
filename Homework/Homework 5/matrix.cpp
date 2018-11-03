@@ -35,12 +35,33 @@ class Matrix
 
 		~Matrix()
         {
+            delete[] _matrix;
             //deallocate the memory which holds matrix elements
             //delete[] data;
         }
 
+        int GetNumRows()
+        {
+            return numRows;
+        }
+
+        int GetNumCols()
+        {
+            return numCols;
+        }
+
         Matrix& operator=(const Matrix &m)
         {
+            delete[] _matrix;
+            numRows = m.GetNumRows();
+            numCols = m.GetNumCols();
+            Matrix(numRows, numCols);
+            
+            for(int i = 0; i < numRows * numCols; i++)
+            {
+                this->[i] = m[i];
+            }
+            
             //delete data
             //set new size equal to m's sizes
             //initialize new matrix
@@ -97,7 +118,7 @@ class Matrix
                 cRow = 1;
             }
             cCol = i % numCols;
-            return this->_matrix(cRow, cCol);
+            return _matrix(cRow, cCol);
             //return the ith element of the matrix, reading L-R then Top-Bottom
         }
 
