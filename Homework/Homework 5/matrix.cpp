@@ -17,11 +17,11 @@ class Matrix
         Matrix(const Matrix &);
         ~Matrix();
         Matrix& operator=(const Matrix &);
-        Matrix operator*(Matrix &);
-        Matrix operator+(Matrix &);
+        Matrix operator*(const Matrix &);
+        Matrix operator+(const Matrix &);
         double operator[](int &);
         double operator()(int &, int &);
-        void operator<<() const;
+        std::ostream& operator<< (std::ostream& stream, const Matrix& matrix);
         void operator>>() const;
 
 		Matrix::Matrix(int r, int c)
@@ -35,6 +35,7 @@ class Matrix
             }
             //create r x c matrix
 		}
+
 		Matrix::Matrix()
 		{
             numRows = 0;
@@ -43,11 +44,13 @@ class Matrix
             _matrix[0].resize(0, 0);
             //create 0x0 matrix
 		}
+
 		Matrix::~Matrix()
         {
             //deallocate the memory which holds matrix elements
             //delete[] data;
         }
+
         Matrix& operator=(const Matrix &m)
         {
             //delete data
@@ -56,6 +59,7 @@ class Matrix
             //loop and copy data elements
             return *this;
         }
+
         Matrix operator*(const Matrix &n)
         {
             Matrix prodMatrix(numRows, numCols);
@@ -63,7 +67,6 @@ class Matrix
             
             for(int i = 0; i < this->numCols; i++)
             {
-                
                 for(int j = 0; j < numCols; j++)
                 {
                     mRow[j] = _matrix[j][i];
@@ -78,6 +81,7 @@ class Matrix
             return prodMatrix;
             //multiplies two matrices and returns new matrix
         }
+
         Matrix operator+(const Matrix &m)
         {
             Matrix resultMatrix(numRows, numCols);
@@ -93,6 +97,7 @@ class Matrix
             return resultMatrix;
             //adds two matrices and returns new matrix
         }
+
         double operator[](int &i)
         {
             int cRow, cCol, index;
@@ -107,15 +112,25 @@ class Matrix
             return this->_matrix(cRow, cCol);
             //return the ith element of the matrix, reading L-R then Top-Bottom
         }
+
         double operator()(int &i, int &j)
         {
             return _matrix[i][j];
             //return the i,jth element of the matrix. i is the row, j is the column
         }
-        void operator<<()
-        {
-            //sends a matrix to ostream (do not use std::cout in the operator)
+
+        std::ostream& operator<<(std::ostream& stream, const Matrix& matrix) {
+            for(int i = 0; i < numCols; i++)
+            {
+                //print opening bracket
+                for(int j = 0; j < numRows; j++)
+                {
+                    //print value
+                }
+            }
+            
         }
+
         void operator>>()
         {
             //reads a matrix
@@ -128,7 +143,6 @@ int GetNumCases()
 	std::cin >> response;
 	return response;
 }
-
 
 std::string GetStringArgument()
 {
