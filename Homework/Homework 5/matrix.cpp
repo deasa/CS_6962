@@ -9,22 +9,10 @@ class Matrix
 	private:
         unsigned int numRows;
         unsigned int numCols;
-        std::vector<std::vector<double> > _matrix;
+        std::vector<std::vector<double>> _matrix;
 
 	public:
-        Matrix(int, int);
-        Matrix();
-        Matrix(const Matrix &);
-        ~Matrix();
-        Matrix& operator=(const Matrix &);
-        Matrix operator*(const Matrix &);
-        Matrix operator+(const Matrix &);
-        double operator[](int &);
-        double operator()(int &, int &);
-        std::ostream& operator<< (std::ostream& stream, const Matrix& matrix);
-        void operator>>() const;
-
-		Matrix::Matrix(int r, int c)
+		Matrix(int r, int c)
 		{
             numRows = r;
             numCols = c;
@@ -36,7 +24,7 @@ class Matrix
             //create r x c matrix
 		}
 
-		Matrix::Matrix()
+		Matrix()
 		{
             numRows = 0;
             numCols = 0;
@@ -45,7 +33,7 @@ class Matrix
             //create 0x0 matrix
 		}
 
-		Matrix::~Matrix()
+		~Matrix()
         {
             //deallocate the memory which holds matrix elements
             //delete[] data;
@@ -122,13 +110,12 @@ class Matrix
         std::ostream& operator<<(std::ostream& stream, const Matrix& matrix) {
             for(int i = 0; i < numCols; i++)
             {
-                //print opening bracket
                 for(int j = 0; j < numRows; j++)
                 {
-                    //print value
+                    stream << _matrix(i, j);
                 }
             }
-            
+            return stream;
         }
 
         void operator>>()
@@ -151,9 +138,46 @@ std::string GetStringArgument()
     return arg;
 }
 
+int GetIntArgument()
+{
+    int arg;
+    std::cin >> arg;
+    return arg;
+}
+
 void MatrixOperation()
 {
     std::string operation = GetStringArgument();
+    m1Rows = GetIntArgument();
+    m1Cols = GetIntArgument();
+    Matrix m1 = Matrix(m1Rows, m1Cols);
+    
+    for(int i = 0; i < m1Cols; i++)
+    {
+        for(int j = 0; j < m1Rows; j++)
+        {
+            m1(i, j) = GetIntArgument();
+        }   
+    }
+    
+    m2Rows = GetIntArgument();
+    m2Cols = GetIntArgument();
+    Matrix m2 = Matrix(m2Rows, m2Cols);
+
+    for(int i = 0; i < m2Cols; i++)
+    {
+        for(int j = 0; j < m2Rows; j++)
+        {
+            m2(i, j) = GetIntArgument();
+        }   
+    }
+    
+    if (operation == "multiply") {
+        std::cout << m1 * m2;
+    }
+    else if (operation = "add") {
+        std::cout << m1 + m2;
+    }
 }
 
 void PrintCaseStatement(int i)
