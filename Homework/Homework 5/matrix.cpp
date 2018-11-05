@@ -41,12 +41,12 @@ class Matrix
 
 		~Matrix()
         {
-			//for (int i = 0; i < this->numRows; i++)
-			//{
-			//	delete[] & this->_matrix[i];
-			//}
-            //deallocate the memory which holds matrix elements
-            //delete[] data;
+			/*for (int i = 0; i < this->numRows; i++)
+			{
+				delete[] & this->_matrix[i];
+			}
+          deallocate the memory which holds matrix elements
+          delete[] data;*/
         }
 
         inline Matrix& operator=(Matrix &m)
