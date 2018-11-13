@@ -1,7 +1,7 @@
 numCases = int(input())
 
 def PrintCaseStatement(i):
-    print('Case: ' + str(i))
+    print('Case ' + str(i) + ":")
 
 def Echo():
     print("Echo: " + input())
